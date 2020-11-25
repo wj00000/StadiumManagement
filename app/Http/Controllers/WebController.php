@@ -35,7 +35,7 @@ class WebController extends Controller
         //如果相等，验证成功就返回echostr
         if ($this->checkSignature($request)) {
             //返回echostr
-            $echostr = $_GET['echostr'];
+            $echostr = $request->get('echostr');
             if ($echostr) {
                 echo $echostr;
                 exit;
