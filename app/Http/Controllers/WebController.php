@@ -39,6 +39,8 @@ class WebController extends Controller
             if ($echostr) {
                 echo $echostr;
                 exit;
+            }else{
+                echo  $echostr.'不对';
             }
         }
     }
