@@ -7,12 +7,12 @@ use Illuminate\Http\Request;
 class WebController extends Controller
 {
 //检查标签
-    public function checkSignature()
+    public function checkSignature(Request $request)
     {
         //先获取到这三个参数
-        $signature = $_GET['signature'];
-        $nonce = $_GET['nonce'];
-        $timestamp = $_GET['timestamp'];
+        $signature = $request->get('signature');
+        $nonce =  $request->get('nonce');
+        $timestamp = $request->get('timestamp');
 
         //把这三个参数存到一个数组里面
         $tmpArr = array($timestamp,$nonce,'WVq4zq8C4eczdTPc8cteMS88yn5GsCzS');
@@ -30,10 +30,10 @@ class WebController extends Controller
         return false;
     }
 
-    public function init()
+    public function init(Request $request)
     {
         //如果相等，验证成功就返回echostr
-        if ($this->checkSignature()) {
+        if ($this->checkSignature($request)) {
             //返回echostr
             $echostr = $_GET['echostr'];
             if ($echostr) {
