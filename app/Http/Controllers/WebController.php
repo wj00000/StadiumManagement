@@ -19,7 +19,7 @@ class WebController extends Controller
         $tmpStr    = implode($tmpArr);
         $hashcode  = sha1($tmpStr);
         if ($hashcode == $signature){
-            return true;
+            return $echostr;
         }else{
             return false;
         }
