@@ -13,14 +13,15 @@ class WebController extends Controller
         $timestamp = $data['timestamp'];
         $nonce     = $data['nonce'];
         $echostr   = $data['echostr'];
-        $token     = "WVq4zq8C4eczdTPc8cteMS88yn5GsCzS";
+        $token     = "WVq4zq8C4eczdTPc8cteMS88yn5GsCjS";
         $tmpArr    = [$token, $timestamp, $nonce];
-        sort($tmpArr);
+        sort($tmpArr,SORT_STRING);
         $tmpStr    = implode($tmpArr);
         $hashcode  = sha1($tmpStr);
         if ($hashcode == $signature){
-            return $echostr;
+            return true;
+        }else{
+            return false;
         }
-        dd('错误');
     }
 }
