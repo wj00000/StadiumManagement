@@ -17,4 +17,5 @@ use Illuminate\Support\Facades\Route;
 //    return view('welcome');
 //});
 Route::get('/', 'WebController@init');
-Route::get('/wx-init','WebController@init');
+//微信授权
+Route::get('/wechat-login','WebController@init');

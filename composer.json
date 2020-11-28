@@ -23,7 +23,9 @@
         "overtrue/laravel-lang": "^4.1",
         "overtrue/laravel-wechat": "5.*",
         "overtrue/wechat": "4.*",
-        "tucker-eric/eloquentfilter": "^2.4"
+        "tucker-eric/eloquentfilter": "^2.4",
+        "ext-http": "*",
+        "ext-pdo": "*"
     },
     "require-dev": {
         "facade/ignition": "^2.0",
