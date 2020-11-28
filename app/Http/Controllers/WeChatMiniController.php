@@ -12,7 +12,7 @@ class WeChatMiniController extends Controller
     {
         $code = $request->get('code', '');
         if (!$code) {
-            throw new CustomException(50065, '登录失败');
+            throw new CustomException(50065, '登录失败!');
         }
         $iv            = $request->get('iv');
         $encryptedData = $request->get('encryptedData');
@@ -23,7 +23,7 @@ class WeChatMiniController extends Controller
             $sessions['unionid'] = $app->encryptor->decryptData($sessions['session_key'], $iv, $encryptedData)['unionId'];
         }
         if (!isset($sessions['openid']) || !isset($sessions['unionid'])) {
-            throw new CustomException(50066, '登录失败');
+            throw new CustomException(50066, '登录失败!');
         }
         $wechatUser = WechatUser::where('unionid', $sessions['unionid'])->first();
         if (!$wechatUser) {

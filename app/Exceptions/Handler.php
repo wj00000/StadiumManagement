@@ -41,7 +41,6 @@ class Handler extends ExceptionHandler
      *
      * @param  \Throwable $exception
      * @return void
-
      * @throws \Throwable
      */
     public function report(Throwable $exception)
@@ -134,6 +133,7 @@ class Handler extends ExceptionHandler
             if ($exception instanceof HttpException) {
                 return ResultVo::fail($debug ? $exception->getMessage() : '发送了太多请求。', [], 500017, 200);
             }
+
             /**
              * 一些SQL的问题
              * 例如：表名不对，字段不存在等
@@ -155,6 +155,7 @@ class Handler extends ExceptionHandler
             if ($exception instanceof RuntimeException) {
                 return ResultVo::fail($debug ? $exception->getMessage() : '网络出错，请稍后尝试。', [], 500017, 200);
             }
+            return ResultVo::fail($exception->getMessage(), [], 500017, 200);
         }
 
         return parent::render($request, $exception);

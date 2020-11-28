@@ -12,6 +12,8 @@ class VerifyCsrfToken extends Middleware
      * @var array
      */
     protected $except = [
-        'api/weixin/*'
+        'api/weixin/*',
+        'auth/wechat-login',
+
     ];
 }

@@ -11,6 +11,8 @@ class WeChatUser extends Authenticatable
 {
     use HasApiTokens, Notifiable, UserTrait;
 
+    protected $table = 'wechat_users';
+
     const STATUS_ENABLE = 1;
     const STATUS_DISABLE = 1;
 

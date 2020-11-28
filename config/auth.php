@@ -47,9 +47,9 @@ return [
             'hash'     => false,
         ],
 
-        'bookApi' => [
+        'api_book' => [
             'driver'   => 'token',
-            'provider' => 'bookUsers',
+            'provider' => 'book_users',
             'hash'     => false,
         ],
     ],
@@ -73,10 +73,6 @@ return [
 
     'providers' => [
         'users'     => [
-            'driver' => 'eloquent',
-            'model'  => App\User::class,
-        ],
-        'bookUsers' => [
             'driver' => 'eloquent',
             'model'  => App\Models\WeChatUser::class,
         ],
