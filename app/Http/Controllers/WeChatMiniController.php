@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Exceptions\CustomException;
 use App\Models\WeChatUser;
-use App\Vo\ResultVo;
 use Illuminate\Http\Request;
 
 class WeChatMiniController extends Controller
@@ -49,3 +48,4 @@ class WeChatMiniController extends Controller
             ]);
         }
     }
+}

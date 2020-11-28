@@ -18,4 +18,4 @@ use Illuminate\Support\Facades\Route;
 //});
 Route::get('/', 'WebController@init');
 //微信授权
-Route::get('/wechat-login','WebController@init');
+Route::get('/wechat-login','WeChatMiniController@login');
