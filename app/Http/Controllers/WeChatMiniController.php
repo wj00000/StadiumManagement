@@ -23,7 +23,7 @@ class WeChatMiniController extends Controller
         $sessions = $app->encryptor->decryptData($sessions['session_key'], $iv, $encryptedData);
 
         $wechatUser = WechatUser::where('book_openid', $sessions['openId'])->first();
-        if (!$wechatUser) {
+        if ($wechatUser) {
             $wechatUser->update([
                 'book_openid' => $sessions['openId'],
                 'nick_name'   => $sessions['nickName'],
