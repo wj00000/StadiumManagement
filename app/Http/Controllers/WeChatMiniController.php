@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Exceptions\CustomException;
+use App\Http\Resources\WechatUser\WeChatUserResource;
 use App\Models\WeChatUser;
 use App\Vo\ResultVo;
+use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 
 class WeChatMiniController extends Controller
@@ -30,7 +32,7 @@ class WeChatMiniController extends Controller
                 'avatar_url'  => $sessions['avatarUrl'],
             ]);
         } else {
-            WechatUser::create([
+            $wechatUser = WechatUser::create([
                 'phone'          => '',
                 'book_openid'    => $sessions['openId'],
                 'avatar_url'     => $sessions['avatarUrl'],
@@ -44,6 +46,26 @@ class WeChatMiniController extends Controller
                 'offical_openid' => '',
             ]);
         }
-        return ResultVo::success('登陆成功!',[]);
+        $token                    = $this->getToken($wechatUser);
+        $wechatUser               = $wechatUser->toArray();
+        $wechatUser['book_token'] = $token;
+        return ResultVo::success('登陆成功!', $wechatUser);
+    }
+
+    public function getToken($weChatUser)
+    {
+        $http     = new Client();
+        $response = $http->post(config('app.url') . '/oauth/token', [
+            'form_params' => [
+                'username'      => $weChatUser->book_openid,
+                'password'      => '123456',
+                'grant_type'    => 'password',
+                'client_id'     => env('PASSPORT_PERSONAL_ACCESS_CLIENT_ID', 2),
+                'client_secret' => env('YYY9QamCBw49bMRHvHPe0vvtdn9JyLbWTebcprRP', 'YYY9QamCBw49bMRHvHPe0vvtdn9JyLbWTebcprRP'),
+                'provider'      => 'users',
+                'type'          => WeChatUser::LOGIN_TYPE_BOOK_WECHAT,
+            ],
+        ]);
+        return json_decode((string)$response->getBody(), true);
     }
 }

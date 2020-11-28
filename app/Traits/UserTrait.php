@@ -13,7 +13,7 @@ trait UserTrait
     public function findForPassport($username)
     {
         $loginType = Request::get('type', WeChatUser::LOGIN_TYPE_BOOK_WECHAT);
-        $user      = $this->where('unionid', $username)->first();
+        $user      = $this->where('book_openid', $username)->first();
 
         if (!$user) {
             throw new OAuthServerException('用户不存在！', 6, 'invalid_credentials', 401);
@@ -29,9 +29,6 @@ trait UserTrait
     {
         switch ($this->loginType) {
             case WeChatUser::LOGIN_TYPE_BOOK_WECHAT:
-                if ($password != $this->book_openid) {
-                    throw new OAuthServerException('用户不匹配。', 6, 'invalid_credentials', 401);
-                }
                 break;
             default:
                 return FALSE;
